@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { FaTrash, FaEdit } from "react-icons/fa";
 
-
-
 function DisplayList() {
     const [listChuot, setListChuot] = useState(["Chuột nhắt", "Chuột đồng", "Chuột cống"]);
 
