@@ -40,3 +40,66 @@
 .read-the-docs {
   color: #888;
 }
+
+/* ===== MODAL OVERLAY ===== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* ===== MODAL BOX ===== */
+.modal {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 320px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== MODAL HEADER ===== */
+.modal h3 {
+  margin-top: 0;
+}
+
+/* ===== INPUT ===== */
+.modal input {
+  width: 100%;
+  padding: 8px;
+  margin: 10px 0;
+}
+
+/* ===== ACTION BUTTON ===== */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.modal-actions button {
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.action-barBtn {
+  display: flex;
+  align-items: center;   /* căn giữa theo chiều dọc */
+  gap: 12px;             /* khoảng cách giữa các nút */
+  margin: 16px 0;
+}
+.chuot-single {
+  display: flex;
+  
+  flex-direction: column;
+  align-items: center;   /* căn giữa ngang */
+  margin-top: 16px;
+}
+
+.avatar {
+  border-radius: 50%;
+  object-fit: cover;
+}

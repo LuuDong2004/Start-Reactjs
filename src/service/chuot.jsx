@@ -9,8 +9,8 @@ const arrayChuot = ["Chuột nhắt", "Chuột đồng", "Chuột cống"]; // k
  
 function Chuot() {
   return (
-    <>
-      <h4>{conChuot.name}</h4>
+    <div className="chuot-single">
+      <h4 style={{ color: "rgba(225, 146, 72, 1)" }}>{conChuot.name}</h4>
       <img
         className="avatar"
         src={conChuot.imageUrl}
@@ -20,9 +20,10 @@ function Chuot() {
           height: conChuot.imageSize
         }}
       />
-    </>
+    </div>
   );
 }
+
 
 function DisplayArray() {
     return(
