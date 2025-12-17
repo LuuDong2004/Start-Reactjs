@@ -23,8 +23,6 @@ function Chuot() {
     </div>
   );
 }
-
-
 function DisplayArray() {
     return(
        <div>

@@ -93,7 +93,7 @@
 }
 .chuot-single {
   display: flex;
-  
+
   flex-direction: column;
   align-items: center;   /* căn giữa ngang */
   margin-top: 16px;
@@ -103,3 +103,130 @@
   border-radius: 50%;
   object-fit: cover;
 }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.center {
+  text-align: center;
+  margin-top: 80px;
+}
+
+/* =========================
+   GAME PAGE (BÚA Ở ĐÂY)
+========================= */
+.game-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #e9eef3;
+}
+/* Force game area and mouse to use hammer cursor */
+/* removed global CSS cursor image to avoid duplicate cursors; JS component handles cursor */
+
+.custom-cursor {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 4000; /* bring hammer above the mouse image */
+  user-select: none;
+}
+/* =========================
+   GAME BOARD
+========================= */
+.game-board {
+  position: relative;
+  width: 600px;
+  height: 400px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  overflow: hidden;
+}
+
+/* =========================
+   HEADER
+========================= */
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  background: #f5f7fa;
+  border-bottom: 1px solid #ddd;
+  font-weight: bold;
+}
+
+/* =========================
+   MOUSE (ẨN CURSOR KHI HOVER)
+========================= */
+.mouse {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+
+  /* ẨN CHUỘT THẬT */
+  cursor: inherit;
+  touch-action: manipulation;
+
+  border: 2px solid white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+
+  z-index: 3000; /* ensure mouse image is above the custom hammer cursor */
+
+  transition:
+    top 0.25s linear,
+    left 0.25s linear,
+    transform 0.1s;
+}
+
+@media (hover: hover) {
+  .mouse:hover {
+    transform: scale(1.1);
+  }
+}
+
+/* =========================
+   COMBO EFFECT
+========================= */
+.combo {
+  color: red;
+  font-weight: bold;
+  animation: pulse 0.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* =========================
+   GAME OVER OVERLAY
+========================= */
+.game-over {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.game-over button {
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+
