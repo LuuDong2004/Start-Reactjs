@@ -140,8 +140,10 @@ body {
 ========================= */
 .game-board {
   position: relative;
-  width: 600px;
-  height: 400px;
+  /* responsive: max 600x400, scale down on small screens */
+  width: min(600px, 95vw);
+  aspect-ratio: 3 / 2; /* 600 / 400 */
+  height: auto;
   background: white;
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.15);

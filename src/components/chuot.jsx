@@ -1,14 +1,19 @@
-function Mouse({ position, onHit }) {
+function Mouse({ position, onHit, size = 60 }) {
+  const style = {
+    left: `${position.x}px`,
+    top: `${position.y}px`,
+    width: `${size}px`,
+    height: `${size}px`
+  };
+
   return (
     <img
       src="/images/chuot.jpg"
       alt="mouse"
-      onClick={onHit}
+      onPointerDown={onHit}
       className="mouse"
-      style={{
-        left: position.x,
-        top: position.y
-      }}
+      style={style}
+      draggable={false}
     />
   );
 }

@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import Mouse from "../components/chuot";
 import HammerCursor from "../components/HammerCursor";
+import { useRef } from "react";
 
 const GAME_TIME = 30;
 const BOARD = { width: 600, height: 400 };
@@ -21,13 +22,24 @@ function Game() {
     const [isOver, setIsOver] = useState(false);
 
     const [pos, setPos] = useState({ x: 100, y: 100 });
+    const boardRef = useRef(null);
 
     const randomPosition = useCallback(() => {
-        const maxX = BOARD.width - MOUSE_SIZE;
-        const maxY = BOARD.height - MOUSE_SIZE - TOP_OFFSET;
+        const board = boardRef.current;
+        if (!board) {
+            const maxX = BOARD.width - MOUSE_SIZE;
+            const maxY = BOARD.height - MOUSE_SIZE - TOP_OFFSET;
+            return {
+                x: Math.random() * maxX,
+                y: Math.random() * maxY + TOP_OFFSET
+            };
+        }
+        const rect = board.getBoundingClientRect();
+        const maxX = rect.width - MOUSE_SIZE;
+        const maxY = rect.height - MOUSE_SIZE - TOP_OFFSET;
         return {
-            x: Math.random() * maxX,
-            y: Math.random() * maxY + TOP_OFFSET
+            x: Math.random() * Math.max(0, maxX),
+            y: Math.random() * Math.max(0, maxY) + TOP_OFFSET
         };
     }, []);
 
@@ -86,9 +98,9 @@ function Game() {
 
     return (
         <div className="game-page">
-            <div className="game-board">
+            <div className="game-board" ref={boardRef}>
                 {/* JS-based hammer cursor */}
-                {!isOver && <HammerCursor active={!isOver} />}
+                {!isOver && <HammerCursor active={!isOver} containerRef={boardRef} />}
                 <div className="game-header">
                     <span>⏱ {time}s</span>
                     <span>⭐ {score}</span>
@@ -103,7 +115,7 @@ function Game() {
                 </div>
 
                 {!isOver && (
-                    <Mouse position={pos} onHit={hitMouse} speed={speed} />
+                    <Mouse position={pos} onHit={hitMouse} speed={speed} size={MOUSE_SIZE} />
                 )}
 
                 {isOver && (
