@@ -34,32 +34,6 @@ function DisplayArray() {
     </div>
     );
 }
-
-function DisplayList() {
-  return(
-    <div>
-      <h3>Đây là gia đình chuột (List) :</h3>
-      {
-        arrayChuot.map((item, index) => (
-          <p key={index}>{item}</p>
-        ))
-      }
-      {addList()}
-    </div>
-  )
-}
-
-function addList(){
-  return(
-  <div>
-    <h4>Gia nhập gia đình chuột</h4>
-    <input type="text" placeholder="Nhập tên chuột" />
-    <button>Gia nhập</button>
-  </div>
-  );
-}
-
 export default Chuot;
 export { DisplayArray };
-export { DisplayList };
 
