@@ -5,9 +5,12 @@ import Music from "../service/music.jsx";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+
+
 function Home() {
   const [mode, setMode] = useState(null);
   const navigate = useNavigate();
+
 
   let chuot = null;
 
@@ -33,7 +36,10 @@ function Home() {
           🎮 Chơi Game
         </button>
         <button onClick={() => navigate("/about")}>
-           🔒 Bí mật của chuột
+          🔒 Bí mật của chuột
+        </button>
+        <button onClick={() => navigate("/login")}>
+          Đăng nhập
         </button>
       </div>
       <div className="content">
