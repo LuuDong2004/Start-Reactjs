@@ -4,6 +4,7 @@ import { DisplayList } from '../service/chuotService.jsx';
 import Music from "../service/music.jsx";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { helloApi } from '../api/helloApi.ts';
 
 
 
@@ -18,6 +19,15 @@ function Home() {
   if (mode === "array") chuot = DisplayArray();
   if (mode === "list") chuot = <DisplayList />;
 
+   const handleHello = async () => {
+    try {
+      const res = await helloApi.hello();
+      alert(res.data);
+    } catch (error) {
+      navigate("/login");
+    }
+  };
+  
   return (
     <div className="App">
       <h1 style={{ color: "rgba(18, 110, 121, 1)" }}>
@@ -27,6 +37,9 @@ function Home() {
       <p>Xin chào<br />Bạn khỏe chứ!</p>
 
       <div className="action-barBtn">
+        <button onClick={handleHello}>
+          Gọi Jmix
+        </button>
         <button onClick={() => setMode("single")}>1 con chuột</button>
         <button onClick={() => setMode("array")}>Array chuột</button>
         <button onClick={() => setMode("list")}>List chuột</button>

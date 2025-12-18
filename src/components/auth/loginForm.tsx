@@ -12,23 +12,25 @@ interface LoginFormProps {
   error?: string;
 }
 
-export const LoginForm = ({ onSubmit, loading = false, error }: LoginFormProps) => {
+const LoginForm = ({ onSubmit, loading = false, error }: LoginFormProps) => {
   const [values, setValues] = useState<LoginFormValues>({
     username: "",
     password: "",
   });
 
-  // sự kiện thay đổi khi người dùng nhập liệu
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-
-  
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!values.username || !values.password) return;
-    onSubmit(values);
+
+    if (typeof onSubmit === "function") {
+      onSubmit(values);
+    } else {
+      console.error("onSubmit is not a function!");
+    }
   };
 
   return (
@@ -40,7 +42,7 @@ export const LoginForm = ({ onSubmit, loading = false, error }: LoginFormProps) 
           name="username"
           value={values.username}
           onChange={handleChange}
-          placeholder="Nhập tên "
+          placeholder="Nhập tên"
         />
       </div>
 
