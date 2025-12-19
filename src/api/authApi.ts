@@ -1,28 +1,31 @@
-import axiosClient from "./axiosClient";
+import axios from 'axios';
+import { token } from '../api/token.ts';
 
-export interface LoginPayload {
-    username: string;
-    password: string;
+interface TokenResponse {
+  access_token: string;
+  token_type: string;
+  expires_in: number;
 }
 
-export const authApi = {
+export const getToken = async (): Promise<string | null> => {
+  try {
+    const res = await axios.post<TokenResponse>(
+      "http://localhost:8080/oauth2/token",
+      new URLSearchParams({ grant_type: "client_credentials" }),
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          "Authorization": "Basic ZG9uZzEzMTAyMDoxMzEwMjA=", // Base64(client_id:client_secret)
+        },
+      }
+    );
 
-    login(data: LoginPayload) {
-        const formData = new URLSearchParams();
-        formData.append("username", data.username);
-        formData.append("password", data.password);
-
-        return axiosClient.post("/login", formData, {
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            withCredentials: true,
-        });
-    },
-    getCurrentUser() {
-        return axiosClient.get("/rest/user/current");
-    },
-
-    logout() {
-        return axiosClient.post("/rest/logout");
-    },
-
-}
+    const accessToken = res.data.access_token;
+    token.set(accessToken);
+    return accessToken;
+  } catch (err: any) {
+    console.error("Lấy token thất bại:", err.response?.data || err.message);
+    token.clear();
+    return null;
+  }
+};
